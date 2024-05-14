@@ -7,7 +7,7 @@
 #include <Color.au3>
 #include <WinAPISysWin.au3>
 
-global $splashUserText, $J[11], $m = "", $I
+global $splashUserText, $J[11], $m = "", $I, $pixelOffSet
 
 $J[1] = " "
 $J[2] = "  "
@@ -19,6 +19,8 @@ $J[7] = "       "
 $J[8] = "        "
 $J[9] = "         "
 $J[10] = "          "
+
+$pixelOffSet = 100
 
 Local $userData = string(@UserName) & $J[Random(1,10,1)]
 Local $computerData = string(@ComputerName) & $J[Random(1,10,1)]
@@ -34,15 +36,15 @@ splashtext()
 
 
 Func splashtext()
-        ; Font type to be used for setting the font of the controls.
-        Local Const $sFont = "Ariel"
+	; Font type to be used for setting the font of the controls.
+	Local Const $sFont = "Ariel"
 
-        ; Create a GUI with various controls.
-        Local $hGUI = GUICreate("Example", @DeskTopWidth + 5, @DeskTopHeight + 5, -1, -1, -1, $WS_EX_TRANSPARENT)
+	; Create a GUI with various controls.
+	Local $hGUI = GUICreate("watermark", @DeskTopWidth + $pixelOffSet, @DeskTopHeight + $pixelOffSet, -1, -1, -1, $WS_EX_TRANSPARENT)
 
-        ; Create label controls.
-        GUICtrlCreateLabel($splashUserText, -1, -1,@DeskTopWidth + 500, @DeskTopHeight + 500, $SS_CENTER)
-        GUICtrlSetFont(-1, 30, $FW_NORMAL, $GUI_FONTNORMAL, $sFont) ; Set the font of the previous control.
+	; Create label controls.
+	GUICtrlCreateLabel($splashUserText, -1, -1,@DeskTopWidth + $pixelOffSet, @DeskTopHeight + $pixelOffSet, $SS_CENTER)
+	GUICtrlSetFont(-1, 72, $FW_NORMAL, $GUI_FONTNORMAL, $sFont) ; Set the font of the previous control.
 	GUICtrlSetColor(-1,0xFFFFFF)
 	GUISetBkColor(0x000000)
 	_WinAPI_SetLayeredWindowAttributes($hGUI, 0x000000)
